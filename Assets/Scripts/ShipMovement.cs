@@ -7,6 +7,8 @@ public class ShipMovement : MonoBehaviour
 
     private Rigidbody2D ship;
 
+    public Missile missilePrefab;
+
     private bool moving;
 
     private float direction;
@@ -29,12 +31,19 @@ public class ShipMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             direction = 1.0f;
-        } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             direction = -1.0f;
-        } else
+        }
+        else
         {
             direction = 0.0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
         }
     }
 
@@ -50,5 +59,12 @@ public class ShipMovement : MonoBehaviour
         {
             ship.AddTorque(direction * this.turnSpeed);
         }
+    }
+
+
+    private void Shoot()
+    {
+        Missile missile = Instantiate(this.missilePrefab, this.transform.position, this.transform.rotation);
+        missile.CreateMissile(this.transform.up);
     }
 }
