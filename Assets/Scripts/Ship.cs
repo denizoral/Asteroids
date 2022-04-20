@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipMovement : MonoBehaviour
+public class Ship : MonoBehaviour
 {
 
     private Rigidbody2D ship;
@@ -43,6 +43,7 @@ public class ShipMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("executed the space key");
             Shoot();
         }
     }
@@ -64,7 +65,12 @@ public class ShipMovement : MonoBehaviour
 
     private void Shoot()
     {
+        Debug.Log("Shoot function works");
         Missile missile = Instantiate(this.missilePrefab, this.transform.position, this.transform.rotation);
+
+
+     
         missile.CreateMissile(this.transform.up);
+        
     }
 }
