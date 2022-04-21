@@ -1,6 +1,10 @@
 # Asteroids
 Asteroids game made with Unity
 
+I plan on adding more features to this game, currently it has one powerup that can be picked up which is triple missiles.
+
+More features will be coming!
+
 
 ## Some images from the game!
 
@@ -8,7 +12,6 @@ Asteroids game made with Unity
 ![image](https://user-images.githubusercontent.com/55638248/164568074-86b8ea68-c262-4402-9af2-3719d26f0063.png)
 
 # Gameplay
-![image](https://user-images.githubusercontent.com/55638248/164568187-d837e4dd-5bc2-40df-b7b2-146ad2d1bbd6.png)
 
 ![image](https://user-images.githubusercontent.com/55638248/164568194-57f5f94f-0c69-4744-9c05-13022495ecfd.png)
 
