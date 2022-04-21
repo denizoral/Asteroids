@@ -20,8 +20,6 @@ public class Missile : MonoBehaviour
         body.AddForce(direction * this.missileSpeed);
 
         Destroy(this.gameObject, this.missileTimeout); //destroy after 10 seconds (time can be adjusted in the editor)
-
-        Debug.Log("in create missile");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

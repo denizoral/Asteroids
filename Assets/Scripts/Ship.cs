@@ -17,6 +17,8 @@ public class Ship : MonoBehaviour
 
     public float turnSpeed = 1.0f;
 
+    public int lives = 3;
+
     private void Awake()
     {
         ship = GetComponent<Rigidbody2D>();
@@ -43,7 +45,6 @@ public class Ship : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("executed the space key");
             Shoot();
         }
     }
@@ -65,12 +66,27 @@ public class Ship : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("Shoot function works");
+
         Missile missile = Instantiate(this.missilePrefab, this.transform.position, this.transform.rotation);
 
 
      
         missile.CreateMissile(this.transform.up);
         
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag.Equals("Asteroid")) //Habit from java of using .equals
+        {
+            ship.velocity = Vector3.zero;
+            ship.angularVelocity = 0.0f;
+
+            this.gameObject.SetActive(false);
+
+            FindObjectOfType<GameManager>().shipDestroyed();
+
+        }
     }
 }
