@@ -23,7 +23,7 @@ public class AsteroidSpawner : MonoBehaviour
         {
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * this.spawnDistance;
             Vector3 spawnPoint = this.transform.position + spawnDirection;
-            spawnPoint.z = 1;
+            //spawnPoint.z = 1;
             
             
             float variance = Random.Range(-this.trajectoryVariance, this.trajectoryVariance);

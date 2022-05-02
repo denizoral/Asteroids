@@ -69,16 +69,14 @@ public class Ship : MonoBehaviour
 
         Missile missile = Instantiate(this.missilePrefab, this.transform.position, this.transform.rotation);
 
-
-     
         missile.CreateMissile(this.transform.up);
-        
+
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag.Equals("Asteroid")) //Habit from java of using .equals
+        if(collision.gameObject.tag.Equals("Asteroid"))
         {
             ship.velocity = Vector3.zero;
             ship.angularVelocity = 0.0f;

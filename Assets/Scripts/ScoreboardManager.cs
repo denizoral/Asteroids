@@ -10,9 +10,11 @@ public class ScoreboardManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
+    public TextMeshProUGUI highScoreText;
 
     int score = 0;
     int lives = 3;
+    int highScore = 0;
 
     private void Awake()
     {
@@ -22,6 +24,10 @@ public class ScoreboardManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        highScore = PlayerPrefs.GetInt("High Score", 0);
+        highScoreText.text = "High Score: " + highScore.ToString();
+
         scoreText.text = "Score: " + score.ToString();
         livesText.text = "Lives: " + lives.ToString();
     }
@@ -32,6 +38,11 @@ public class ScoreboardManager : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
     }
 
+    public void updateLives(int lives)
+    {
+        this.lives = lives;
+        livesText.text = "Lives: " + lives.ToString();
+    }
     public void setLives()
     {
         lives--;

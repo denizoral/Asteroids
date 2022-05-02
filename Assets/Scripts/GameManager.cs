@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public Ship ship;
 
+    public Powerup powerup;
+
     public ParticleSystem explode;
 
     public GameOver gameOver;
@@ -21,6 +23,17 @@ public class GameManager : MonoBehaviour
     {
         this.explode.transform.position = asteroid.transform.position;
         this.explode.Play();
+
+        //select a random number to spawn a powerup
+        int spawnPowerupChance = Random.Range(1, 10);
+        if(spawnPowerupChance == 2)
+        {
+            float ranX = Random.Range(-10f, 10f);
+            float ranY = Random.Range(-5.7f, 5.7f);
+            Vector3 ranPos = new Vector3(ranX, ranY, 1.0f);
+            Debug.Log("Chosen position" + ranPos);
+            Powerup powerup = Instantiate(this.powerup, ranPos, this.powerup.transform.rotation);
+        }
 
         if (asteroid.size <= 0.7f) {
             score += 100;
@@ -51,6 +64,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void pickUpPowerup()
+    {
+        this.lives++;
+        ScoreboardManager.manager.updateLives(lives);
+    }
+
     public void Respawn()
     {
         this.ship.transform.position = Vector3.zero;
@@ -67,16 +87,12 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game Over!");
-
+        int highScore = PlayerPrefs.GetInt("High Score", 0);
+        if (highScore <= score) {
+            PlayerPrefs.SetInt("High Score", score);
+            PlayerPrefs.Save();
+        }
         gameOver.Setup();
-
-        //lives = 3;
-       // score = 0;
-
-        //ScoreboardManager.manager.setScore(score);
-        //ScoreboardManager.manager.resetLives();
-
-        //Invoke(nameof(Respawn), this.respawnTimer);
 
     }
 }
