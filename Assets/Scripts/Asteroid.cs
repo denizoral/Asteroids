@@ -12,6 +12,7 @@ public class Asteroid : MonoBehaviour
     public float xSize = 1.5f;
     public float speed = 50.0f;
     public float lifetime = 50.0f;
+    public AudioClip bang;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Missile"))
         {
+           
             if ((this.size / 2.0f) >= this.mSize)
             {
                 splitAsteroid();
@@ -50,6 +52,10 @@ public class Asteroid : MonoBehaviour
             FindObjectOfType<GameManager>().asteroidDestroyed(this);
 
             Destroy(this.gameObject);
+
+
+            AudioSource.PlayClipAtPoint(bang, this.gameObject.transform.position);
+
         } 
     }
 

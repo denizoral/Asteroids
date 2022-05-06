@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public ParticleSystem explode;
 
+    public AchievementDisplay achievement;
+
     public GameOver gameOver;
 
     public int lives = 3;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     public float respawnTimer = 3.0f;
 
     public int score = 0;
+
+    private bool achieved = false;
     public void asteroidDestroyed(Asteroid asteroid)
     {
         this.explode.transform.position = asteroid.transform.position;
@@ -28,21 +32,41 @@ public class GameManager : MonoBehaviour
         int spawnPowerupChance = Random.Range(1, 10);
         if(spawnPowerupChance == 2)
         {
-            float ranX = Random.Range(-10f, 10f);
-            float ranY = Random.Range(-5.7f, 5.7f);
-            Vector3 ranPos = new Vector3(ranX, ranY, 1.0f);
-            Debug.Log("Chosen position" + ranPos);
-            Powerup powerup = Instantiate(this.powerup, ranPos, this.powerup.transform.rotation);
+            int selectRandomPowerup = Random.Range(1, 2);
+            switch (selectRandomPowerup)
+            {
+                case 1:
+                    Powerup powerup = Instantiate(this.powerup, positionGenerator(), this.powerup.transform.rotation);
+                    break;
+                case 2:
+                    
+                    break;
+            }
+            
+        }
+        if (score >= 1000 && !achieved)
+        {
+            achieved = true;
+            StartCoroutine(achievement.setAchievement(4));
         }
 
         if (asteroid.size <= 0.7f) {
-            score += 100;
+        score += 100;
         } else if (asteroid.size <= 1.25f) {
             score += 50;
         } else {
             score += 25;
         }
         ScoreboardManager.manager.setScore(score);
+        
+    }
+
+    private Vector3 positionGenerator()
+    {
+        float ranX = Random.Range(-10f, 10f);
+        float ranY = Random.Range(-5.7f, 5.7f);
+        Vector3 ranPos = new Vector3(ranX, ranY, 1.0f);
+        return ranPos;
     }
 
     public void shipDestroyed()

@@ -19,6 +19,11 @@ public class Ship : MonoBehaviour
 
     public int lives = 3;
 
+    public AudioSource shooting;
+
+    public AudioClip destroyed;
+
+    public AudioSource thrust;
     private void Awake()
     {
         ship = GetComponent<Rigidbody2D>();
@@ -55,11 +60,17 @@ public class Ship : MonoBehaviour
         if (moving)
         {
             ship.AddForce(this.transform.up * this.shipSpeed);
+
+            if (!thrust.isPlaying)
+                thrust.Play();
         }
 
         if (direction != 0)
         {
             ship.AddTorque(direction * this.turnSpeed);
+
+            if (!thrust.isPlaying)
+                thrust.Play();
         }
     }
 
@@ -70,6 +81,8 @@ public class Ship : MonoBehaviour
         Missile missile = Instantiate(this.missilePrefab, this.transform.position, this.transform.rotation);
 
         missile.CreateMissile(this.transform.up);
+
+        shooting.Play();
 
     }
 
@@ -85,6 +98,8 @@ public class Ship : MonoBehaviour
 
             FindObjectOfType<GameManager>().shipDestroyed();
 
+
+            AudioSource.PlayClipAtPoint(destroyed, this.gameObject.transform.position);
         }
     }
 }

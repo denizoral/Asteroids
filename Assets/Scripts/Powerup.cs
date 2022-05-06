@@ -9,6 +9,8 @@ public class Powerup : MonoBehaviour
     //private Rigidbody2D powerup;
     public float lifetime = 5.0f;
 
+    public AudioClip pickup;
+
 
     private void Awake()
     {
@@ -30,6 +32,8 @@ public class Powerup : MonoBehaviour
             FindObjectOfType<GameManager>().pickUpPowerup();
 
             Destroy(gameObject);
+
+            AudioSource.PlayClipAtPoint(pickup, this.gameObject.transform.position);
         }
     }
 }

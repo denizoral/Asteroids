@@ -6,7 +6,8 @@ public class PowerupSpawner : MonoBehaviour
 {
     public static PowerupSpawner manager;
 
-    public Powerup powerupPrefab;
+    public Powerup healthPowerup;
+    public Powerup speedPowerup;
    
     public float ranX;
     public float ranY;
@@ -14,18 +15,13 @@ public class PowerupSpawner : MonoBehaviour
 
     public float spawnDistance = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void spawnPowerup()
     {       
-         ranX = Random.Range(-10f, 10f);
-         ranY = Random.Range(-5.7f, 5.7f);
-         ranPos = new Vector3(ranX, ranY, 1.0f);
-         Debug.Log("Chosen position" + ranPos);
-         Powerup powerup = Instantiate(this.powerupPrefab, ranPos, powerupPrefab.transform.rotation);
+        ranX = Random.Range(-10f, 10f);
+        ranY = Random.Range(-5.7f, 5.7f);
+        ranPos = new Vector3(ranX, ranY, 1.0f);
+        Debug.Log("Chosen position" + ranPos);
+        
+        Powerup powerup = Instantiate(this.healthPowerup, ranPos, healthPowerup.transform.rotation);
     }
 }
