@@ -1,7 +1,7 @@
 # Asteroids
 Asteroids game made with Unity
 
-I plan on adding more features to this game, currently it has one powerup that can be picked up which is triple missiles.
+I plan on adding more features to this game, currently it has one powerup that can be picked up which is extra health.
 
 More features will be coming!
 
